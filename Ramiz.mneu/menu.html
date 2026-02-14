@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menü | RAMİZ</title>
+    <meta name="description" content="Ramiz'in zengin menüsünü keşfedin. Köfte çeşitleri, ızgara etler, tatlılar ve daha fazlası." />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* Menu Page Specific Styles */
+      .menu-page {
+        min-height: 100vh;
+        padding-top: 100px;
+        background: var(--clr-bg);
+      }
+
+      .menu-header {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .menu-header h1 {
+        font-family: var(--ff-heading);
+        font-size: 48px;
+        color: var(--clr-text);
+        margin-bottom: 16px;
+      }
+
+      .menu-header p {
+        font-size: 18px;
+        color: var(--clr-text-light);
+      }
+
+      .back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--clr-primary);
+        font-weight: 600;
+        margin-bottom: 40px;
+        transition: var(--transition);
+      }
+
+      .back-btn:hover {
+        color: var(--clr-accent);
+        transform: translateX(-4px);
+      }
+
+      .category-nav {
+        position: sticky;
+        top: 80px;
+        background: rgba(250, 247, 242, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 20px 0;
+        margin-bottom: 60px;
+        z-index: 100;
+        border-bottom: 1px solid rgba(11, 89, 69, 0.2);
+      }
+
+      .category-nav-inner {
+        display: flex;
+        gap: 16px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      .category-nav-inner::-webkit-scrollbar {
+        display: none;
+      }
+
+      .category-btn {
+        padding: 12px 24px;
+        background: transparent;
+        border: 2px solid rgba(17, 120, 93, 0.3);
+        color: var(--clr-text-light);
+        font-weight: 600;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: var(--transition);
+        white-space: nowrap;
+        font-size: 14px;
+      }
+
+      .category-btn:hover {
+        border-color: var(--clr-primary);
+        color: var(--clr-primary);
+      }
+
+      .category-btn.active {
+        background: var(--clr-primary);
+        border-color: var(--clr-primary);
+        color: var(--clr-white);
+      }
+
+      .menu-category-section {
+        display: none;
+        animation: fadeIn 0.5s ease;
+      }
+
+      .menu-category-section.active {
+        display: block;
+      }
+
+      .category-title {
+        font-family: var(--ff-heading);
+        font-size: 36px;
+        color: var(--clr-text);
+        margin-bottom: 12px;
+      }
+
+      .category-description {
+        font-size: 16px;
+        color: var(--clr-text-light);
+        margin-bottom: 40px;
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 24px;
+        margin-bottom: 80px;
+      }
+
+      .product-card {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(11, 89, 69, 0.15);
+        border-radius: 16px;
+        overflow: hidden;
+        transition: var(--transition);
+      }
+
+      .product-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--clr-primary);
+        box-shadow: 0 8px 32px rgba(17, 120, 93, 0.2);
+      }
+
+      .product-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .product-content {
+        padding: 24px;
+      }
+
+      .product-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 12px;
+      }
+
+      .product-title {
+        font-family: var(--ff-heading);
+        font-size: 20px;
+        color: var(--clr-text);
+        margin-bottom: 4px;
+      }
+
+      .product-price {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--clr-accent);
+      }
+
+      .product-description {
+        font-size: 14px;
+        color: var(--clr-text-light);
+        line-height: 1.6;
+      }
+
+      .special-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        background: linear-gradient(135deg, var(--clr-primary), var(--clr-accent));
+        color: var(--clr-white);
+        font-size: 11px;
+        font-weight: 700;
+        border-radius: 12px;
+        margin-left: 8px;
+        text-transform: uppercase;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .menu-page {
+          padding-top: 80px;
+        }
+
+        .menu-header h1 {
+          font-size: 32px;
+        }
+
+        .category-nav {
+          top: 60px;
+        }
+
+        .products-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav container">
+        <a href="index.html" class="logo"><img src="assets/logo.png" alt="RAMİZ"></a>
+        <ul class="nav-list">
+          <li><a href="index.html#home" class="nav-link">Ana Sayfa</a></li>
+          <li><a href="menu.html" class="nav-link active">Menü</a></li>
+          <li><a href="index.html#about" class="nav-link">Hikayemiz</a></li>
+          <li><a href="index.html#contact" class="nav-link">İletişim</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button class="lang-toggle" id="langToggle">EN</button>
+        </div>
+        <button class="mobile-toggle" id="mobileToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </nav>
+    </header>
+
+    <main class="menu-page">
+      <div class="container">
+        <a href="index.html" class="back-btn">← Ana Sayfaya Dön</a>
+        
+        <div class="menu-header">
+          <h1>Lezzet Menümüz</h1>
+          <p>1928'den beri süregelen geleneksel tatlar</p>
+        </div>
+
+        <!-- Category Navigation -->
+        <div class="category-nav">
+          <div class="container">
+            <div class="category-nav-inner">
+              <button class="category-btn active" data-category="red-meat">Kırmızı Et Ürünleri</button>
+              <button class="category-btn" data-category="white-meat">Beyaz Et Ürünleri</button>
+              <button class="category-btn" data-category="sides">Yan Ürünler</button>
+              <button class="category-btn" data-category="desserts">Tatlılar</button>
+              <button class="category-btn" data-category="kids">Çocuk Menüsü</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Red Meat Products -->
+        <div class="menu-category-section active" id="red-meat">
+          <h2 class="category-title">Kırmızı Et Ürünleri</h2>
+          <p class="category-description">Özenle seçilmiş dana etinden hazırlanan ızgara lezzetlerimiz</p>
+          
+          <div class="products-grid">
+            <div class="product-card">
+              <img src="assets/meat_product_1.jpg" alt="Ramiz Köfte" class="product-image">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Ramiz Köfte<span class="special-badge">Efsane</span></h3>
+                  </div>
+                  <span class="product-price">₺280</span>
+                </div>
+                <p class="product-description">Taptaze yeşillikler ve Ramiz'e özel sıcacık pidesi ile 1928'den beri değişmeyen imza lezzet.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <img src="assets/meat_product_2.jpg" alt="Yoğurtlu Ramiz Köfte" class="product-image">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Yoğurtlu Ramiz Köfte</h3>
+                  </div>
+                  <span class="product-price">₺320</span>
+                </div>
+                <p class="product-description">Özel süzme yoğurt, taze yeşillikler ve tereyağlı sıcak pide ile servis edilen efsanevi tat.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <img src="assets/meat_product_3.jpg" alt="Ramiz Spesiyal" class="product-image">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Ramiz Spesiyal<span class="special-badge">Efsane</span></h3>
+                  </div>
+                  <span class="product-price">₺450</span>
+                </div>
+                <p class="product-description">Izgara lezzetlerinin şefin özel dokunuşlarıyla buluştuğu zengin ve prestijli karışım.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <img src="assets/meat_product_4.jpg" alt="Kaşarlı Ramiz Köfte" class="product-image">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Kaşarlı Ramiz Köfte</h3>
+                  </div>
+                  <span class="product-price">₺310</span>
+                </div>
+                <p class="product-description">Geleneksel yöntemlerle hazırlanan, içi erimiş kaşarlı zengin köfte.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <img src="assets/Antrikot.jpg" alt="Izgara Antrikot" class="product-image">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Izgara Antrikot</h3>
+                  </div>
+                  <span class="product-price">₺540</span>
+                </div>
+                <p class="product-description">Özenle dinlendirilmiş, mermerimsi dokusuyla yumuşacık dana antrikot.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <img src="assets/meat_product_4.jpg" alt="Karışık Ramiz Köfte
+" class="product-image">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Karışık Ramiz Köfte</h3>
+                  </div>
+                  <span class="product-price">₺295</span>
+                </div>
+                <p class="product-description">Makedon usulü baharatsız hazırlanan saf et lezzeti.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <img src="assets/Kasap-Kofte.jpg" alt="Kasap Köfte" class="product-image">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Kasap Köfte</h3>
+                  </div>
+                  <span class="product-price">₺290</span>
+                </div>
+                <p class="product-description">Geleneksel kasap tarifiyle özenle yoğrulan köfte lezzeti.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <img src="assets/Karisramiz_fodte.jpg" alt="Karışık Izgara" class="product-image">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Karışık Izgara</h3>
+                  </div>
+                  <span class="product-price">₺580</span>
+                </div>
+                <p class="product-description">Köfte, antrikot, sucuk ve tavuk çeşitlerinden oluşan muhteşem ızgara şöleni.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- White Meat Products -->
+        <div class="menu-category-section" id="white-meat">
+          <h2 class="category-title">Beyaz Et Ürünleri</h2>
+          <p class="category-description">Taze tavuk etinden hazırlanan ızgara seçeneklerimiz</p>
+          
+          <div class="products-grid">
+            <div class="product-card">
+              <img src="assets/white_meat_1.jpg" alt="Acı Soslu Piliç" class="product-image">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Acı Soslu Piliç</h3>
+                  </div>
+                  <span class="product-price">₺300</span>
+                </div>
+                <p class="product-description">Özel acı sos ile marine edilmiş tavuk göğsü, ızgarada mükemmel kıvamda pişirilmiş.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <img src="assets/white_meat_2.jpg" alt="Çıtır Piliç" class="product-image">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Çıtır Piliç</h3>
+                  </div>
+                  <span class="product-price">₺300</span>
+                </div>
+                <p class="product-description">Özel baharatlarla marine edilmiş çıtır tavuk, taze salata ve makarna ile servis edilir.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Köri Soslu Piliç</h3>
+                  </div>
+                  <span class="product-price">₺300</span>
+                </div>
+                <p class="product-description">Özel köri sosuyla harmanlanmış, krema ve baharatlarla zenginleştirilmiş tavuk göğsü.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <img src="assets/white_meat_6.jpg" alt="Kekik Soslu Piliç" class="product-image">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Kekik Soslu Piliç</h3>
+                  </div>
+                  <span class="product-price">₺300</span>
+                </div>
+                <p class="product-description">Taze kekik ve baharatlarla marine edilmiş tavuk göğsü, salata ve makarna ile servis.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <img src="assets/white_meat_4.jpg" alt="Piliç Izgara" class="product-image">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Piliç Izgara</h3>
+                  </div>
+                  <span class="product-price">₺300</span>
+                </div>
+                <p class="product-description">Izgara tavuk göğsü, taze salata ve makarna ile servis edilir.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <img src="assets/white_meat_5.jpg" alt="Soslu Piliç" class="product-image">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Soslu Piliç</h3>
+                  </div>
+                  <span class="product-price">₺300</span>
+                </div>
+                <p class="product-description">Özel sosla hazırlanmış tavuk göğsü, taze yeşillikler ve makarna eşliğinde.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Side Dishes -->
+        <div class="menu-category-section" id="sides">
+          <h2 class="category-title">Yan Ürünler</h2>
+          <p class="category-description">Ana yemeklerinizi tamamlayan lezzetli yan ürünler</p>
+          
+          <div class="products-grid">
+            <div class="product-card">
+              <img src="assets/piyaz_salad.png" alt="Piyaz" class="product-image">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Piyaz<span class="special-badge">Özel</span></h3>
+                  </div>
+                  <span class="product-price">₺195</span>
+                </div>
+                <p class="product-description">Haşlanmış fasulye, domates ve özel sirkeli sosla hazırlanan geleneksel tat.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Ramiz Salata</h3>
+                  </div>
+                  <span class="product-price">₺180</span>
+                </div>
+                <p class="product-description">Taze mevsim sebzeleri, mısır ve özel soslarla hazırlanan klasik.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Mevsim Salata</h3>
+                  </div>
+                  <span class="product-price">₺160</span>
+                </div>
+                <p class="product-description">Günün taze yeşillikleri ve sızma zeytinyağı ile.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Patates Kızartması</h3>
+                  </div>
+                  <span class="product-price">₺120</span>
+                </div>
+                <p class="product-description">Çıtır çıtır altın sarısı patates kızartması.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Pilav</h3>
+                  </div>
+                  <span class="product-price">₺95</span>
+                </div>
+                <p class="product-description">Tereyağlı, nefis Türk pilavı.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Közlenmiş Sebze</h3>
+                  </div>
+                  <span class="product-price">₺140</span>
+                </div>
+                <p class="product-description">Biber, domates ve patlıcan közde pişirilmiş.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Desserts -->
+        <div class="menu-category-section" id="desserts">
+          <h2 class="category-title">Tatlılar</h2>
+          <p class="category-description">Geleneksel Türk tatlıları ile öğününüzü tamamlayın</p>
+          
+          <div class="products-grid">
+            <div class="product-card">
+              <img src="assets/tulumba_dessert.png" alt="Tulumba Tatlısı" class="product-image">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Tulumba Tatlısı</h3>
+                  </div>
+                  <span class="product-price">₺120</span>
+                </div>
+                <p class="product-description">Köfteci Ramiz klasiği, her zaman taze ve çıtır çıtır.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Höşmerim<span class="special-badge">Özel</span></h3>
+                  </div>
+                  <span class="product-price">₺165</span>
+                </div>
+                <p class="product-description">Balıkesir yöresine özgü, taze peynirden yapılan hafif lezzet.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Kemalpaşa Tatlısı</h3>
+                  </div>
+                  <span class="product-price">₺140</span>
+                </div>
+                <p class="product-description">Şerbetini tam çekmiş, tercihe göre kaymakla sunulur.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Karamelli Trileçe</h3>
+                  </div>
+                  <span class="product-price">₺180</span>
+                </div>
+                <p class="product-description">Üç farklı sütle ıslatılmış kek ve yoğun karamel sos.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Sütlaç</h3>
+                  </div>
+                  <span class="product-price">₺110</span>
+                </div>
+                <p class="product-description">Fırında pişirilmiş geleneksel sütlaç.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Kazandibi</h3>
+                  </div>
+                  <span class="product-price">₺125</span>
+                </div>
+                <p class="product-description">Osmanlı mutfağının eşsiz lezzeti.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kids Menu -->
+        <div class="menu-category-section" id="kids">
+          <h2 class="category-title">Çocuk Menüsü</h2>
+          <p class="category-description">Küçük misafirlerimiz için özel hazırlanmış porsiyonlar</p>
+          
+          <div class="products-grid">
+            <div class="product-card">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Mini Ramiz Köfte</h3>
+                  </div>
+                  <span class="product-price">₺180</span>
+                </div>
+                <p class="product-description">Çocuk porsiyonu köfte, patates kızartması ve pilav ile.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Tavuk Parçaları</h3>
+                  </div>
+                  <span class="product-price">₺160</span>
+                </div>
+                <p class="product-description">Çıtır tavuk parçaları, patates ve meyve suyu.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Makarna</h3>
+                  </div>
+                  <span class="product-price">₺140</span>
+                </div>
+                <p class="product-description">Tereyağlı veya soslu makarna, rendelenmiş peynir ile.</p>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <div class="product-content">
+                <div class="product-header">
+                  <div>
+                    <h3 class="product-title">Çocuk Menü Özel</h3>
+                  </div>
+                  <span class="product-price">₺220</span>
+                </div>
+                <p class="product-description">Ana yemek, yan ürün, tatlı ve içecek dahil komple menü.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-top">
+          <a href="index.html" class="logo"><img src="assets/logo.png" alt="RAMİZ"></a>
+          <div class="social-links">
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2024 Ramiz. Tüm hakları saklıdır.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal">
+      <span class="modal-close">&times;</span>
+      <img class="modal-content" id="modalImage">
+      <div id="modalCaption"></div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      // Category switching
+      const categoryBtns = document.querySelectorAll('.category-btn');
+      const categorySections = document.querySelectorAll('.menu-category-section');
+
+      categoryBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetCategory = btn.dataset.category;
+          
+          // Update active button
+          categoryBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          
+          // Update active section
+          categorySections.forEach(section => {
+            section.classList.remove('active');
+            if (section.id === targetCategory) {
+              section.classList.add('active');
+              // Scroll to section
+              section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

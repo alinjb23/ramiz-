@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RAMİZ | Fine Dining Experience</title>
+    <meta
+      name="description"
+      content="Elevate your senses with a premium fine dining experience at Ramiz. Exquisite flavors, elegant atmosphere."
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav container">
+        <a href="#" class="logo"><img src="assets/logo.png" alt="RAMİZ"></a>
+        <ul class="nav-list">
+          <li><a href="#home" class="nav-link active" data-i18n="nav_home">Ana Sayfa</a></li>
+          <li><a href="menu.html" class="nav-link" data-i18n="nav_menu">Menü</a></li>
+          <li><a href="#about" class="nav-link" data-i18n="nav_about">Hikayemiz</a></li>
+          <li><a href="#contact" class="nav-link" data-i18n="nav_contact">İletişim</a></li>
+        </ul>
+        <div class="nav-actions">
+          <div class="lang-switcher">
+            <button id="lang-toggle" class="lang-btn">EN</button>
+          </div>
+          <button class="mobile-toggle" aria-label="Toggle Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home" class="hero section">
+        <div class="hero-bg">
+          <video autoplay muted loop playsinline id="hero-video">
+            <source src="ramizvideo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="container hero-content">
+          <h1 class="hero-title reveal" data-i18n="hero_title">Gerçek Lezzet, <br><span>Ramiz Köfte</span></h1>
+          <p class="hero-tagline reveal" data-i18n="hero_tagline">1928'den beri değişmeyen formül, taze malzemeler ve ustalıkla hazırlanan ızgara lezzetleri.</p>
+          <div class="hero-btns reveal">
+            <a href="menu.html" class="btn btn-outline" data-i18n="hero_btn_menu">Menüyü İncele</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Signature Dishes / Highlights -->
+      <section class="section highlight-section">
+        <div class="container">
+          <div class="section-header text-center">
+            <h2 class="section-title" data-i18n="highlight_title">Ramiz'in İmzası</h2>
+            <p class="section-subtitle" data-i18n="highlight_subtitle">Nesillerdir süregelen eşsiz ızgara deneyimi</p>
+          </div>
+          <div class="highlight-grid">
+            <div class="highlight-card reveal">
+              <div class="card-img" style="background-image: url('assets/meat_product_1.jpg')"></div>
+              <div class="card-content">
+                <h3 data-i18n="highlight_item1_title">Ramiz Köfte</h3>
+                <p data-i18n="highlight_item1_desc">Taptaze yeşillikler ve markaya özel sıcacık pidesi ile 1928'den beri değişmeyen imza lezzet.</p>
+              </div>
+            </div>
+            <div class="highlight-card reveal">
+              <div class="card-img" style="background-image: url('assets/meat_product_2.jpg')"></div>
+              <div class="card-content">
+                <h3 data-i18n="highlight_item2_title">Yoğurtlu Ramiz</h3>
+                <p data-i18n="highlight_item2_desc">Özel süzme yoğurt, taze yeşillikler ve tereyağlı sıcak pide ile servis edilen efsanevi tat.</p>
+              </div>
+            </div>
+            <div class="highlight-card reveal">
+              <div class="card-img" style="background-image: url('assets/meat_product_3.jpg')"></div>
+              <div class="card-content">
+                <h3 data-i18n="highlight_item3_title">Ramiz Spesiyal</h3>
+                <p data-i18n="highlight_item3_desc">Izgara lezzetlerinin şefin özel dokunuşlarıyla buluştuğu zengin ve prestijli karışım.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+        <!-- Menu Section -->
+        <!-- About Us Section -->
+        <section id="about" class="section about-section">
+            <div class="container about-grid">
+                <div class="about-img reveal">
+                    <img src="assets/kofteci-ramiz-1951.jpeg" alt="Köfteci Ramiz 1951">
+                </div>
+                <div class="about-content reveal">
+                    <h2 class="section-title" data-i18n="about_title">Bir Lezzet <br><span>Hikayesi</span></h2>
+                    <p class="about-text" data-i18n="about_text">1928 yılında Akhisar'da temelleri atılan Köfteci Ramiz, nesilden nesile aktarılan özel formülü ve kalite anlayışıyla bugün Türkiye'nin en seçkin restoran zincirlerinden biri haline gelmiştir. Geleneksel yöntemleri modern hizmet anlayışıyla birleştiriyoruz.</p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-num">1928</div>
+                            <div class="stat-label" data-i18n="stat_founded">Kuruluş Yılı</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-num">150+</div>
+                            <div class="stat-label" data-i18n="stat_branches">Şube Sayısı</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-num">100%</div>
+                            <div class="stat-label" data-i18n="stat_natural">Doğal Et</div>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary" data-i18n="about_btn">Hikayemizi Keşfedin</a>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Contact & Reservation -->
+        <section id="contact" class="section contact-section">
+            <div class="container">
+                <div class="contact-card reveal">
+                    <div class="contact-info">
+                        <h2 class="section-title" data-i18n="contact_title">Sizi <span>Bekliyoruz</span></h2>
+                        <p data-i18n="contact_text">Eşsiz lezzetlerimizi yerinde denemek için Taurus AVM şubemize bekleriz. Sorularınız ve detaylı bilgi için bize ulaşabilirsiniz.</p>
+                        
+                        <div class="info-list">
+                            <div class="info-item">
+                                <span class="info-icon">📍</span>
+                                <div>
+                                    <h5 data-i18n="contact_addr_label">Mağaza Adresi</h5>
+                                    <p data-i18n="contact_addr_val">Konya Yolu Mevlana Bulvarı No:190/b 419, Balgat, 06520 (TAURUS AVM)</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-icon">🕒</span>
+                                <div>
+                                    <h5 data-i18n="contact_hours_label">Çalışma Saatleri</h5>
+                                    <p data-i18n="contact_hours_val">Pzt - Paz: 10:00 - 22:00</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-icon">📞</span>
+                                <div>
+                                    <h5 data-i18n="contact_phone_label">İletişim</h5>
+                                    <p>+90 (312) 221 41 41</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact-btns">
+                            <a href="tel:+903122214141" class="btn btn-primary">Hemen Ara</a>
+                            <a href="https://wa.me/903122214141" class="btn btn-outline">WhatsApp</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3061.3648829941726!2d32.809022876012435!3d39.88846217152946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d3458f695f2709%3A0x1d5679485381cd1b!2sK%C3%B6fteci%20Ramiz%20(%20TAURUS%20AVM%20)!5e0!3m2!1str!2str!4v1770991832534!5m2!1str!2str" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <a href="#" class="logo"><img src="assets/logo.png" alt="RAMİZ"></a>
+                <div class="social-links">
+                    <a href="#">Instagram</a>
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 RAMİZ Restaurant. <span data-i18n="footer_rights">All Rights Reserved.</span></p>
+                <div class="footer-links">
+                    <a href="#" data-i18n="footer_privacy">Privacy Policy</a>
+                    <a href="#" data-i18n="footer_terms">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal">
+      <span class="modal-close">&times;</span>
+      <img class="modal-content" id="modalImage">
+      <div id="modalCaption"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
